@@ -64,7 +64,9 @@ def instructions():
 
     make_statement("Instructions", "*", 3)
     print("""
-[placeholder]
+Choose your rounds
+Choose your difficulty
+And then solve the equations by finding the value of xyy
    """)
 
 
@@ -111,22 +113,18 @@ while rounds_played < rounds:
 
     if random_operation != "/":
         # generate the random value and value of x
-        numerical_value = random.randint(0, (10 * difficulty))
+        numerical_value = random.randint(1, (10 * difficulty))
         x_value = random.randint(numerical_value, (20 * difficulty))
     else:
         # and make sure division doesn't have a decimal
-        numerical_value = random.randint(1, (10 * difficulty))  # to ensure no division by zero
-        result = random.randint(1, (20 * difficulty))  # expected answer
-        x_value = result * numerical_value  # to ensure integer division
-
-    # to ensure that it's not multiplying x by 0 as x could be any number from 0 to 20
-    while random_operation == "*" and x_value == 0:
-        x_value = random.randint(numerical_value, (20 * difficulty))
+        numerical_value = random.randint(1, (10 * difficulty))
+        result = random.randint(1, (20 * difficulty))
+        x_value = result * numerical_value
 
     # generate the expression to get the correct answer
     expression = f"{x_value} {random_operation} {numerical_value}"
 
-    # solve the expression and record the answer, then convert the answer to integer in case of division
+    # solve the expression and record the answer, then display divided answers as an whole number
     result = eval(expression)
     result = int(result)
 
