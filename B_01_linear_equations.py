@@ -3,7 +3,7 @@ import random
 
 # functions
 
-def make_statement(statement, decoration, amount):
+def statement_generator(statement, decoration, amount):
     """Adds additional characters to the start and end of headings as decoration"""
     print(f"\n{decoration * amount} {statement} {decoration * amount}")
 
@@ -62,11 +62,11 @@ def string_checker(question, valid_ans=('yes', 'no')):
 def instructions():
     """Prints instructions"""
 
-    make_statement("Instructions", "*", 3)
+    statement_generator("Instructions", "*", 3)
     print("""
 Choose your rounds
 Choose your difficulty
-And then solve the equations by finding the value of xyy
+And then solve the equations by finding the value of x
    """)
 
 
@@ -83,7 +83,7 @@ statistics = []
 # main routine
 
 # print a heading and ask for instructions
-make_statement("Linear Equations Quiz", "❓", 3)
+statement_generator("Linear Equations Quiz", "❓", 3)
 want_instructions = string_checker("Would you like to view the instructions? ").lower()
 
 # Display the instructions if the user wants to see them.
@@ -102,7 +102,7 @@ difficulty = int_check("\nDifficulty? (1-3) ", low=1, high=3)
 # quiz loop begins
 while rounds_played < rounds:
     # print heading
-    make_statement(f"Question {rounds_played + 1}", "*", 3)
+    statement_generator(f"Question {rounds_played + 1}", "*", 3)
     print()
 
     # choose a variable to be used in the equation from the {equation_variables} list
@@ -124,7 +124,7 @@ while rounds_played < rounds:
     # generate the expression to get the correct answer
     expression = f"{x_value} {random_operation} {numerical_value}"
 
-    # solve the expression and record the answer, then display divided answers as an whole number
+    # solve the expression and record the answer, then display divided answers as a whole number
     result = eval(expression)
     result = int(result)
 
@@ -140,13 +140,13 @@ while rounds_played < rounds:
         break
     # checks if the user got it correct and prints as appropriate
     elif int(user_answer) == round(int(x_value), 1):
-        make_statement("Correct!", "👍", 2)
+        statement_generator("Correct!", "👍", 2)
         quiz_history.append(f"Question {rounds_played + 1}\n\n{equation}\nYour answer: "
                             f"{user_answer}\nCorrect answer: {x_value}\n")
         statistics.append(1)
         questions_right += 1
     else:
-        make_statement("Incorrect!", "👎", 2)
+        statement_generator("Incorrect!", "👎", 2)
         quiz_history.append(f"Question {rounds_played + 1}\n\n{equation}\nYour answer: "
                             f"{user_answer}\nCorrect answer: {x_value}\n")
         statistics.append(0)
@@ -164,7 +164,7 @@ if rounds_played > 0:
     percentage = round(percentage)
     # outputs statistics / results
     print()
-    make_statement("Statistics", "📊", 3)
+    statement_generator("Statistics", "📊", 3)
     print(f"Correct: {questions_right}  | Incorrect: {questions_wrong}  | Percentage: {percentage}%\n")
     # optionally outputs game history
     see_history = string_checker("Would you like to see your game history? ")
